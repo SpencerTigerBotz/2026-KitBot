@@ -58,4 +58,9 @@ public final class Constants {
     public static final double DRIVE_SCALING = .7;
     public static final double ROTATION_SCALING = .8;
   }
+
+  public static final class LifterConstants {
+    public static final int LEFT_LIFTER_MOTOR_ID = 7;
+    public static final int RIGHT_LIFTER_MOTOR_ID = 8;
+  }
 }

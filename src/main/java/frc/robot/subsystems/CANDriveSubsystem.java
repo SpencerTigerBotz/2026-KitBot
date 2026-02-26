@@ -6,9 +6,8 @@ package frc.robot.subsystems;
 
 import java.util.function.DoubleSupplier;
 
-import com.ctre.phoenix.motorcontrol.InvertType;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -17,45 +16,22 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.DriveConstants.*;
 
 public class CANDriveSubsystem extends SubsystemBase {
-  private final WPI_VictorSPX leftLeader;
-  private final WPI_VictorSPX leftFollower;
-  private final WPI_VictorSPX rightLeader;
-  private final WPI_VictorSPX rightFollower;
+  private final SparkMax leftLeader;
+  private final SparkMax leftFollower;
+  private final SparkMax rightLeader;
+  private final SparkMax rightFollower;
 
   private final DifferentialDrive drive;
 
   public CANDriveSubsystem() {
     // Create motor controllers (VictorSPX driving CIMs)
-    leftLeader = new WPI_VictorSPX(LEFT_LEADER_ID);
-    leftFollower = new WPI_VictorSPX(LEFT_FOLLOWER_ID);
-    rightLeader = new WPI_VictorSPX(RIGHT_LEADER_ID);
-    rightFollower = new WPI_VictorSPX(RIGHT_FOLLOWER_ID);
+    leftLeader = new SparkMax(LEFT_LEADER_ID, MotorType.kBrushed);
+    leftFollower = new SparkMax(LEFT_FOLLOWER_ID, MotorType.kBrushed);
+    rightLeader = new SparkMax(RIGHT_LEADER_ID, MotorType.kBrushed);
+    rightFollower = new SparkMax(RIGHT_FOLLOWER_ID, MotorType.kBrushed);
 
-    // (Optional) Factory default to clear any old config on used controllers
-    leftLeader.configFactoryDefault();
-    leftFollower.configFactoryDefault();
-    rightLeader.configFactoryDefault();
-    rightFollower.configFactoryDefault();
+    //figure out leader follower config
 
-    // Set neutral mode (Brake helps stop; Coast feels smoother)
-    leftLeader.setNeutralMode(NeutralMode.Brake);
-    leftFollower.setNeutralMode(NeutralMode.Brake);
-    rightLeader.setNeutralMode(NeutralMode.Brake);
-    rightFollower.setNeutralMode(NeutralMode.Brake);
-
-    // Followers follow their leaders
-    leftFollower.follow(leftLeader);
-    rightFollower.follow(rightLeader);
-
-    // Inversion:
-    // Typical convention: invert ONE side so + output drives both sides forward.
-    // Match your old code: left side inverted true.
-    leftLeader.setInverted(true);
-    rightLeader.setInverted(false);
-
-    // Make followers match their leader inversion
-    leftFollower.setInverted(InvertType.FollowMaster);
-    rightFollower.setInverted(InvertType.FollowMaster);
 
     // DifferentialDrive expects SpeedController / MotorController objects.
     drive = new DifferentialDrive(leftLeader, rightLeader);

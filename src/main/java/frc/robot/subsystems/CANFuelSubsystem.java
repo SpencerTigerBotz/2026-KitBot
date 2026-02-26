@@ -15,12 +15,13 @@ import static frc.robot.Constants.FuelConstants.*;
 public class CANFuelSubsystem extends SubsystemBase {
   private final SparkMax feederRoller;
   private final SparkMax intakeLauncherRoller;
-  private final LightsSubsystem lights;
+  //private final LightsSubsystem lights;
   private final RelativeEncoder shooterEncoder;
 
   /** Creates a new CANBallSubsystem. */
-  public CANFuelSubsystem(LightsSubsystem lights) {
-    this.lights = lights;
+  // public CANFuelSubsystem(LightsSubsystem lights) {
+  public CANFuelSubsystem() {
+    // this.lights = lights;
 
     intakeLauncherRoller = new SparkMax(INTAKE_LAUNCHER_MOTOR_ID, MotorType.kBrushed);
     feederRoller = new SparkMax(FEEDER_MOTOR_ID, MotorType.kBrushed);
@@ -46,34 +47,34 @@ public class CANFuelSubsystem extends SubsystemBase {
   public void intake() {
     feederRoller.setVoltage(SmartDashboard.getNumber("Intaking feeder roller value", INTAKING_FEEDER_VOLTAGE));
     intakeLauncherRoller.setVoltage(SmartDashboard.getNumber("Intaking intake roller value", INTAKING_INTAKE_VOLTAGE));
-    lights.setMode(LightsSubsystem.Mode.INTAKING);
+    // lights.setMode(LightsSubsystem.Mode.INTAKING);
   }
 
   public void eject() {
     feederRoller.setVoltage(-1 * SmartDashboard.getNumber("Intaking feeder roller value", INTAKING_FEEDER_VOLTAGE));
     intakeLauncherRoller.setVoltage(
         -1 * SmartDashboard.getNumber("Intaking launcher roller value", INTAKING_INTAKE_VOLTAGE));
-    lights.setMode(LightsSubsystem.Mode.ERROR);
+    // lights.setMode(LightsSubsystem.Mode.ERROR);
   }
 
   public void launch() {
     feederRoller.setVoltage(SmartDashboard.getNumber("Launching feeder roller value", LAUNCHING_FEEDER_VOLTAGE));
     intakeLauncherRoller.setVoltage(
         SmartDashboard.getNumber("Launching launcher roller value", LAUNCHING_LAUNCHER_VOLTAGE));
-    lights.setMode(LightsSubsystem.Mode.LAUNCHING);
+    // lights.setMode(LightsSubsystem.Mode.LAUNCHING);
   }
 
   public void stop() {
     feederRoller.set(0);
     intakeLauncherRoller.set(0);
-    lights.setMode(LightsSubsystem.Mode.IDLE);
+    // lights.setMode(LightsSubsystem.Mode.IDLE);
   }
 
   public void spinUp() {
     feederRoller.setVoltage(SmartDashboard.getNumber("Spin-up feeder roller value", SPIN_UP_FEEDER_VOLTAGE));
     intakeLauncherRoller.setVoltage(
         SmartDashboard.getNumber("Launching launcher roller value", LAUNCHING_LAUNCHER_VOLTAGE));
-    lights.setMode(LightsSubsystem.Mode.SPINUP);
+    // lights.setMode(LightsSubsystem.Mode.SPINUP);
   }
 
   public double getShooterRPM() {

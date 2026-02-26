@@ -25,9 +25,9 @@ import frc.robot.subsystems.LightsSubsystem;
  */
 public class RobotContainer {
     // The robot's subsystems
-    private static final LightsSubsystem lightsSubsystem = new LightsSubsystem();
+    // private static final LightsSubsystem lightsSubsystem = new LightsSubsystem();
     private final CANDriveSubsystem driveSubsystem = new CANDriveSubsystem();
-    private final CANFuelSubsystem ballSubsystem = new CANFuelSubsystem(lightsSubsystem);
+    private final CANFuelSubsystem ballSubsystem = new CANFuelSubsystem();
 
   // The driver's controller
   private final CommandXboxController driverController = new CommandXboxController(
@@ -88,8 +88,8 @@ public class RobotContainer {
     // are also scaled down so the rotation is more easily controllable.
     driveSubsystem.setDefaultCommand(
         driveSubsystem.driveArcade(
-            () -> -driverController.getLeftY() * DRIVE_SCALING,
-            () -> -driverController.getRightX() * ROTATION_SCALING));
+            () -> -driverController.getRightX() * DRIVE_SCALING,
+            () -> -driverController.getLeftY() * ROTATION_SCALING));
   }
 
   /**
