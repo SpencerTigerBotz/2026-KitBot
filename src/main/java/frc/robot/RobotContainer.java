@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+//test comment
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -15,6 +17,8 @@ import frc.robot.commands.Autos;
 import frc.robot.subsystems.CANDriveSubsystem;
 import frc.robot.subsystems.CANFuelSubsystem;
 import frc.robot.subsystems.LightsSubsystem;
+import frc.robot.subsystems.LifterSubsystem;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -28,6 +32,7 @@ public class RobotContainer {
     // private static final LightsSubsystem lightsSubsystem = new LightsSubsystem();
     private final CANDriveSubsystem driveSubsystem = new CANDriveSubsystem();
     private final CANFuelSubsystem ballSubsystem = new CANFuelSubsystem();
+    private final LifterSubsystem lifterSubsystem = new LifterSubsystem();
 
   // The driver's controller
   private final CommandXboxController driverController = new CommandXboxController(
@@ -78,6 +83,10 @@ public class RobotContainer {
     // the intake
     operatorController.a()
         .whileTrue(ballSubsystem.runEnd(() -> ballSubsystem.eject(), () -> ballSubsystem.stop()));
+
+
+    //command for lifter (run on stick of operator controller)
+
 
     // Set the default command for the drive subsystem to the command provided by
     // factory with the values provided by the joystick axes on the driver
