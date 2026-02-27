@@ -86,7 +86,8 @@ public class RobotContainer {
 
 
     //command for lifter (run on stick of operator controller)
-
+    driverController.a()
+        .whileTrue(lifterSubsystem.runEnd(()-> lifterSubsystem.runLifter(0.1), ()-> lifterSubsystem.runLifter(0)));
 
     // Set the default command for the drive subsystem to the command provided by
     // factory with the values provided by the joystick axes on the driver
@@ -97,8 +98,8 @@ public class RobotContainer {
     // are also scaled down so the rotation is more easily controllable.
     driveSubsystem.setDefaultCommand(
         driveSubsystem.driveArcade(
-            () -> -driverController.getRightX() * DRIVE_SCALING,
-            () -> -driverController.getLeftY() * ROTATION_SCALING));
+            () -> driverController.getLeftY() * DRIVE_SCALING,
+            () -> driverController.getRightX() * ROTATION_SCALING));
   }
 
   /**
